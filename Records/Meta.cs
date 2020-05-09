@@ -15,16 +15,12 @@ namespace CSharpAnalyzer.Records
         }
         public string PrintJson(bool beautify = false)
         {
-            if (!beautify)
-                return JsonSerializer.Serialize(data);
-            else
+            var options = new JsonSerializerOptions
             {
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                return JsonSerializer.Serialize(data, options);
-            }
+                WriteIndented = beautify
+            };
+            options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+            return JsonSerializer.Serialize(data, options);
         }
     }
     // TODO あとでテストプロジェクトに移す
@@ -37,6 +33,14 @@ namespace CSharpAnalyzer.Records
             for (int i = 0; i < 3; i++) meta.Add("key0", $"value{i % 2}");
             for (int i = 0; i < 3; i++) meta.Add("key1", $"value{i}");
             const string expected = "{\"key0\":[\"value0\",\"value1\"],\"key1\":[\"value0\",\"value1\",\"value2\"]}";
+            Assert.Equal(expected, meta.PrintJson());
+        }
+        [Fact(DisplayName = "Success to print Json with unescape")]
+        public void g()
+        {
+            var meta = new Meta();
+            meta.Add("key", $"`<>");
+            const string expected = "{\"key\":[\"`<>\"]}";
             Assert.Equal(expected, meta.PrintJson());
         }
     }
