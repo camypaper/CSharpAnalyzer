@@ -17,7 +17,7 @@ namespace CSharpAnalyzer
                 foreach (var y in parser.DependendClasses)
                     result.Add(y, x);
             }
-            Console.WriteLine(result.PrintJson());
+            Console.WriteLine(result.PrintJson(true));
         }
     }
 }

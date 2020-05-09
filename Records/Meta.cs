@@ -13,7 +13,19 @@ namespace CSharpAnalyzer.Records
             if (!data.ContainsKey(target)) data[target] = new HashSet<string>();
             data[target].Add(source);
         }
-        public string PrintJson() => JsonSerializer.Serialize(data);
+        public string PrintJson(bool beautify = false)
+        {
+            if (!beautify)
+                return JsonSerializer.Serialize(data);
+            else
+            {
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                return JsonSerializer.Serialize(data, options);
+            }
+        }
     }
     // TODO あとでテストプロジェクトに移す
     public class MetaTest
