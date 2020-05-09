@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Text.Json;
 using Xunit;
 namespace CSharpAnalyzer.Records
@@ -20,7 +21,7 @@ namespace CSharpAnalyzer.Records
                 WriteIndented = beautify
             };
             options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
-            return JsonSerializer.Serialize(data, options);
+            return Regex.Unescape(JsonSerializer.Serialize(data, options));
         }
     }
     // TODO あとでテストプロジェクトに移す
