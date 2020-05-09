@@ -1,6 +1,3 @@
-## FAQ
-- 動きますか？
-  - :construction:
 ### これはなに？
 Roslyn を使ってソースコード(`.cs`, `.csx`)を解析して、いろいろ情報を抜き出すやつ
 
@@ -14,6 +11,17 @@ Roslyn を使ってソースコード(`.cs`, `.csx`)を解析して、いろい�
 #pragma abc def
 using System;
 [VerifyType(typeof(int),typeof(System.Console))]
+```
+
+### つかいかた
+導入
+```sh
+CSharpAnalyzer$dotnet pack
+CSharpAnalyzer$dotnet tool install --add-source ./nupkg CSharpAnalyzer --version 1.0.0 -g
+```
+使う
+```sh
+$dotnet dependencies
 ```
 
 ### 依存しているもの
