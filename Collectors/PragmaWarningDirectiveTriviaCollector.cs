@@ -11,7 +11,7 @@ namespace CSharpAnalyzer.Collectors
     {
         public PragmaWarningDirectiveTriviaCollector() : base(SyntaxWalkerDepth.StructuredTrivia) { }
         private readonly List<KeyValuePair<string, string>> pragmas = new List<KeyValuePair<string, string>>();
-        public IReadOnlyList<KeyValuePair<string, string>> Pragmas { get { return pragmas; } }
+        public IReadOnlyCollection<KeyValuePair<string, string>> Pragmas { get { return pragmas.AsReadOnly(); } }
         public override void VisitPragmaWarningDirectiveTrivia(PragmaWarningDirectiveTriviaSyntax node)
         {
             var res = node.ToString().Split(new char[] { }, 3, StringSplitOptions.RemoveEmptyEntries);

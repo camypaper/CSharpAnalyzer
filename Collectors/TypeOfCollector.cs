@@ -11,7 +11,7 @@ namespace CSharpAnalyzer.Collectors
     {
         public TypeOfExpressionCollector() { }
         readonly List<TypeSyntax> types = new List<TypeSyntax>();
-        public IReadOnlyList<TypeSyntax> Types { get { return types; } }
+        public IReadOnlyCollection<TypeSyntax> Types { get { return types.AsReadOnly(); } }
         public override void VisitTypeOfExpression(TypeOfExpressionSyntax node)
         {
             types.Add(node.Type);

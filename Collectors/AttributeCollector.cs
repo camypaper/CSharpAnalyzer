@@ -11,7 +11,7 @@ namespace CSharpAnalyzer.Collectors
     {
         public AttributeCollector() : base(SyntaxWalkerDepth.StructuredTrivia) { }
         readonly List<AttributeSyntax> attributes = new List<AttributeSyntax>();
-        public IReadOnlyList<AttributeSyntax> Attributes { get { return attributes; } }
+        public IReadOnlyCollection<AttributeSyntax> Attributes { get { return attributes.AsReadOnly(); } }
         public override void VisitAttribute(AttributeSyntax node)
         {
             attributes.Add(node);

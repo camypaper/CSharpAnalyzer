@@ -11,7 +11,7 @@ namespace CSharpAnalyzer.Collectors
     {
         public ReferenceDirectiveTriviaCollector() : base(SyntaxWalkerDepth.StructuredTrivia) { }
         private readonly List<string> reference = new List<string>();
-        public IReadOnlyList<string> Reference { get { return reference; } }
+        public IReadOnlyCollection<string> Reference { get { return reference.AsReadOnly(); } }
         public override void VisitReferenceDirectiveTrivia(ReferenceDirectiveTriviaSyntax node)
         {
             this.reference.Add(node.File.ValueText);
