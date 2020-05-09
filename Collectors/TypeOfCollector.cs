@@ -34,5 +34,20 @@ namespace CSharpAnalyzer.Collectors
             Assert.Equal(1, collector.Types.Count);
             Assert.Equal("int", collector.Types.First().ToString());
         }
+        [Fact(DisplayName = "Success to parse generic type")]
+        public void g()
+        {
+            var input =
+@"using System;
+using System.Collections.Generic;
+[VerifyType(typeof(List<int>))]
+";
+            var tree = CSharpSyntaxTree.ParseText(input);
+            var root = (CompilationUnitSyntax)tree.GetRoot();
+            var collector = new TypeOfExpressionCollector();
+            collector.Visit(root);
+            Assert.Equal(1, collector.Types.Count);
+            Assert.Equal("List<int>", collector.Types.First().ToString());
+        }
     }
 }

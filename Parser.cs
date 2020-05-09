@@ -40,7 +40,7 @@ namespace CSharpAnalyzer
                 }
                 else
                 {
-                    yield return $"{typeSymbol.ContainingNamespace.ToDisplayString()}.{typeSymbol.OriginalDefinition.ToDisplayString()}";
+                    yield return $"{typeSymbol.ContainingNamespace.ToDisplayString()}.{typeSymbol.OriginalDefinition.MetadataName}";
                 }
             }
         }
